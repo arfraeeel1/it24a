@@ -14,9 +14,18 @@
     <button onclick="addTask()">Add</button>
     <script>
         function addTask(){
-            var textbox = document.getElementById('taskInput');
-            console.log(taskInput.value);
+            const input = document.getElementById('taskInput');
+            const text = input.value.trim();
+            console.log("getTaskText() called: " + input.value);
+
+            return{text,input};
         }
+
+        function getTaskText(){
+            getTaskText();
+        }
+
+        
     </script>
     </body>
     </html>
