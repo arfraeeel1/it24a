@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To Do List</title>
+</head>
+<body>
+  <h1><a href="todolist.html">1. To Do List</a></h1>
+
+  <input type="text" id="taskInput" placeholder="Add a task" />
+  <button onclick="addTask()">Add</button>
+
+  <ul id="tasklist">
+    <li>your task goes here..</li>
+  </ul>
+
+  <script>
+    function addTask() {
+      const input = document.getElementById('taskInput');
+      const text = input.value.trim();
+
+      if (text === "") return;
+
+      const taskList = document.getElementById("tasklist");
+
+      const li = document.createElement("li");
+      li.textContent = text + " ";
+
+      const deleteBtn = createDeleteButton(li);
+      li.appendChild(deleteBtn);
+
+      taskList.appendChild(li);
+
+      // input.value = ""; // ❌ This line was clearing the input — we removed it
+
+      const time = getCurrentTime();
+      console.log(`[ADD] Task added: "${text}" at ${time}`);
+    }
+
+    function createDeleteButton(li) {
+      const deleteBtn = document.createElement("button");
+      deleteBtn.textContent = "X";
+      deleteBtn.className = "delete-btn";
+      deleteBtn.onclick = () => handleDeleteClick(li);
+
+      console.log("createDeleteButton() called ->", li.textContent);
+      return deleteBtn;
+    }
+
+    function handleDeleteClick(li) {
+      const time = getCurrentTime();
+      console.log(`[DELETE] Task removed: "${li.textContent.trim()}" at ${time}`);
+      li.remove();
+    }
+
+    function getCurrentTime() {
+      const now = new Date();
+      return now.toLocaleString();
+    }
+  </script>
+</body>
+</html>
