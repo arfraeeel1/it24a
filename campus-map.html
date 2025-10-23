@@ -29,7 +29,29 @@
      <div id="map"></div>
 </body>
 <script>
-    
+    function initMap(MapDataUrl){
+        const map = L.map ('map'). setView([8.3604,124.8684],17);
+       //Open StreetMap Tile Layer
+        const openStreetMap = L.tileLayer('https://tile.openStreetmap.org/{z}/{x}/{y}.png',{
+            maxZoom:19,
+            attribution: '&copy; OpenStreetMap contributors'
+
+        });
+        //Satellite Tile Layer
+        const satellite = L.tileLayer(
+            'https://server.arcgisonline.com/ArcGIS./rest/services/World_Imagery/MapServer/tile/{z]/{x}/{y}',
+            {attribution: 'Tiles &copy; Esri &mdash; source: Esri, Maxar, Earthstar Geographics, GIS User Community'}
+        );
+
+        openStreetMap.addTo(map);
+        console.log("Base mapp tile layer loaded" + Date());
+
+        
+    }
+    document.addEventListener('DOMContentLoaded',()=>{
+        initMap('');
+
+    })
  </script>
      
 
