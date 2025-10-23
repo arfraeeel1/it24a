@@ -39,7 +39,7 @@
         });
         //Satellite Tile Layer
         const satellite = L.tileLayer(
-            'https://server.arcgisonline.com/ArcGIS./rest/services/World_Imagery/MapServer/tile/{z]/{x}/{y}',
+            'https://server.arcgisonline.com/ArcGIS./rest/services/World_Imagery/MapServer/tile/{z]/{y}/{x}',
             {attribution: 'Tiles &copy; Esri &mdash; source: Esri, Maxar, Earthstar Geographics, GIS User Community'}
         );
 
@@ -66,12 +66,27 @@
                 markerGroups[type].addLayer(marker);
             });
             Object.values(markerGroups).forEach(group => group.addTo(map));
+
+            const baseMaps ={
+                "OpenStreetMap": openStreetMap,
+                "Satellite": satellite
+            }
+
+            const overLayMaps = {};
+
+            Object.keys(markerGroups).forEach(type =>{
+                overLayMaps[type] = markerGroups[type];
+            });
+            L.control.layers(baseMaps, overLayMaps, {collapsed:false}).addTo(map);
         })
+
+    .catch(err => console.error('Error Loading Map Data: ', err));
     }
     document.addEventListener('DOMContentLoaded',()=>{
         initMap('campus-map.json');
 
-    })
+    })      
  </script>
+ </html>
      
 
