@@ -39,7 +39,7 @@
         });
         //Satellite Tile Layer
         const satellite = L.tileLayer(
-            'https://server.arcgisonline.com/ArcGIS./rest/services/World_Imagery/MapServer/tile/{z]/{y}/{x}',
+            'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
             {attribution: 'Tiles &copy; Esri &mdash; source: Esri, Maxar, Earthstar Geographics, GIS User Community'}
         );
 
@@ -55,7 +55,7 @@
                 const type = pin.locationType || "Other";
 
                 if(!markerGroups[type]){
-                    markerGroups[type] = L.LayerGroup();
+                    markerGroups[type] = L.layerGroup();
                 }
 
                 const marker = L.marker([pin.lat,pin.lng]).addTo(map);
